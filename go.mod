@@ -1,4 +1,4 @@
-module go-project
+module main
 
 go 1.18
 
