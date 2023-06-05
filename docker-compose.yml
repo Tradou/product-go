@@ -40,6 +40,14 @@ services:
     networks:
       - go-network
 
+  lint:
+    image: golangci/golangci-lint:v1.42.1
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: [ "golangci-lint", "run", "--disable-all", "--enable=staticcheck"]
+
+
 networks:
   go-network:
     driver: bridge
