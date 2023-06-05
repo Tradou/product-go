@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  api:
+    container_name: app
+    restart: always
+    ports:
+      - '80:80'
+    volumes:
+      - .:/src/app
+    build:
+      dockerfile: dev.Dockerfile
+      context: .
+    networks:
+      - go-network
+
+  mysql:
+    image: mysql:latest
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=go-project
+      - MYSQL_PASSWORD=root
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - go-network
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - cache:/data
+    networks:
+      - go-network
+
+networks:
+  go-network:
+    driver: bridge
+
+volumes:
+  cache:
+    driver: local
+  db-data:
+    driver: local
