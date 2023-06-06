@@ -2,18 +2,12 @@ package endpoints
 
 import (
 	"github.com/gin-gonic/gin"
-	"net/http"
+	"main/handlers"
 )
 
 func RegisterProductEndpoint(router *gin.Engine) {
 	products := router.Group("/products")
 	{
-		products.GET("/", getProducts)
+		products.GET("/", handlers.GetProducts)
 	}
-}
-
-func getProducts(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Products",
-	})
 }
