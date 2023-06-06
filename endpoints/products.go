@@ -6,9 +6,9 @@ import (
 )
 
 func RegisterProductEndpoint(router *gin.Engine) {
-	users := router.Group("/products")
+	products := router.Group("/products")
 	{
-		users.GET("/", getProducts)
+		products.GET("/", getProducts)
 	}
 }
 
