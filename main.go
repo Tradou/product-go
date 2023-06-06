@@ -2,17 +2,26 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"github.com/gin-gonic/gin"
+	_ "github.com/joho/godotenv/autoload"
 	"github.com/redis/go-redis/v9"
+	"main/infrastructure/migrations"
 	"net/http"
+	"os"
 )
 
 func main() {
+	migrations.Migrate()
+
 	router := gin.Default()
 
 	rdb := redis.NewClient(&redis.Options{
-		Addr: "redis:6379",
-		DB:   0,
+		Addr: fmt.Sprintf("%s:%s",
+			os.Getenv("REDIS_HOST"),
+			os.Getenv("REDIS_PORT"),
+		),
+		DB: 0,
 	})
 
 	router.GET("/", func(c *gin.Context) {
