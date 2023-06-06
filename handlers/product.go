@@ -25,6 +25,6 @@ func StoreProduct(c *gin.Context) {
 
 func UpdateProduct(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
-		"message": "Store Product",
+		"message": "Update Product",
 	})
 }
