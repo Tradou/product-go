@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"main/infrastructure/models"
 	"net/http"
@@ -21,6 +22,7 @@ func GetProduct(c *gin.Context) {
 func StoreProduct(c *gin.Context) {
 	var product models.StoreProduct
 	if err := c.ShouldBind(&product); err != nil {
+		fmt.Println(product)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
