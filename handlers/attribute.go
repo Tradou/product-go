@@ -89,7 +89,7 @@ func UpdateAttribute(c *gin.Context) {
 	}
 
 	if err := db.Model(&attribute).Updates(updateData).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update product"})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update attribute"})
 		return
 	}
 
