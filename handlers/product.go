@@ -82,16 +82,16 @@ func UpdateProduct(c *gin.Context) {
 		return
 	}
 
-	var existingProduct models.Product
-	if err := db.First(&existingProduct, productID).Error; err != nil {
+	var product models.Product
+	if err := db.First(&product, productID).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve data from the database"})
 		return
 	}
 
-	if err := db.Model(&existingProduct).Updates(updateData).Error; err != nil {
+	if err := db.Model(&product).Updates(updateData).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update product"})
 		return
 	}
 
-	c.JSON(http.StatusOK, existingProduct)
+	c.JSON(http.StatusOK, product)
 }
