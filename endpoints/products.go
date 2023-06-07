@@ -8,9 +8,9 @@ import (
 func RegisterProductEndpoint(router *gin.Engine) {
 	products := router.Group("/products")
 	{
-		products.GET("/", handlers.GetProducts)
+		products.GET("", handlers.GetProducts)
 		products.GET("/:id", handlers.GetProduct)
-		products.POST("/", handlers.StoreProduct)
+		products.POST("", handlers.StoreProduct)
 		products.PATCH("/:id", handlers.UpdateProduct)
 	}
 }

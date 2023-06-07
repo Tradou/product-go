@@ -8,9 +8,9 @@ import (
 func RegisterAttributeEndpoint(router *gin.Engine) {
 	products := router.Group("/attributes")
 	{
-		products.GET("/", handlers.GetAttributes)
+		products.GET("", handlers.GetAttributes)
 		products.GET("/:id", handlers.GetAttribute)
-		products.POST("/", handlers.StoreAttribute)
+		products.POST("", handlers.StoreAttribute)
 		products.PATCH("/:id", handlers.UpdateAttribute)
 	}
 }
