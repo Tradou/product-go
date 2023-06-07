@@ -17,8 +17,8 @@ func GetProducts(c *gin.Context) {
 		return
 	}
 
-	if err := db.Find(&products).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, "Failed to retrieve data")
+	if err := db.Find(&products).Association("Attributes").Error; err != nil {
+		c.JSON(http.StatusInternalServerError, err.Error())
 		return
 	}
 

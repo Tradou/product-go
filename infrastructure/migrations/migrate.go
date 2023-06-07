@@ -14,7 +14,11 @@ func Migrate() {
 		log.Fatalln(err)
 	}
 
-	if err := db.AutoMigrate(&models.Product{}); err != nil {
+	if err := db.AutoMigrate(
+		&models.Product{},
+		&models.Attribute{},
+		&models.AttributeProduct{},
+	); err != nil {
 		log.Fatalln(err)
 	}
 }
