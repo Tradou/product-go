@@ -6,7 +6,7 @@ import (
 )
 
 func RegisterAttributeProductEndpoint(router *gin.Engine) {
-	products := router.Group("/attributeproducts")
+	products := router.Group("/attribute_products")
 	{
 		products.GET("", handlers.GetAttributeProducts)
 		products.GET("/:id", handlers.GetAttributeProduct)
