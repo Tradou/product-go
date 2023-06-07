@@ -6,5 +6,7 @@ func RegisterEndpoints() {
 	router := gin.Default()
 
 	RegisterProductEndpoint(router)
+	RegisterAttributeEndpoint(router)
+	RegisterAttributeProductEndpoint(router)
 	router.Run(":80")
 }
