@@ -8,7 +8,7 @@ import (
 )
 
 func GetAttributes(c *gin.Context) {
-	var products []models.Attribute
+	var attributes []models.Attribute
 
 	db, err := database.GetDBConnection()
 
@@ -17,17 +17,17 @@ func GetAttributes(c *gin.Context) {
 		return
 	}
 
-	if err := db.Find(&products).Error; err != nil {
+	if err := db.Find(&attributes).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	c.JSON(http.StatusOK, products)
+	c.JSON(http.StatusOK, attributes)
 }
 
 func GetAttribute(c *gin.Context) {
-	var product models.Attribute
-	productId := c.Param("id")
+	var attribute models.Attribute
+	attributeId := c.Param("id")
 
 	db, err := database.GetDBConnection()
 
@@ -36,18 +36,18 @@ func GetAttribute(c *gin.Context) {
 		return
 	}
 
-	if err := db.First(&product, productId).Error; err != nil {
+	if err := db.First(&attribute, attributeId).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, "Failed to retrieve data")
 		return
 	}
 
-	c.JSON(http.StatusOK, product)
+	c.JSON(http.StatusOK, attribute)
 }
 
 func StoreAttribute(c *gin.Context) {
-	var product models.StoreAttribute
+	var attribute models.StoreAttribute
 
-	if err := c.ShouldBind(&product); err != nil {
+	if err := c.ShouldBind(&attribute); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -59,16 +59,16 @@ func StoreAttribute(c *gin.Context) {
 		return
 	}
 
-	if err := db.Create(&product).Error; err != nil {
+	if err := db.Create(&attribute).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	c.JSON(http.StatusCreated, product)
+	c.JSON(http.StatusCreated, attribute)
 }
 
 func UpdateAttribute(c *gin.Context) {
-	productID := c.Param("id")
+	attributeId := c.Param("id")
 	var updateData models.UpdateAttribute
 
 	if err := c.ShouldBindJSON(&updateData); err != nil {
@@ -82,16 +82,16 @@ func UpdateAttribute(c *gin.Context) {
 		return
 	}
 
-	var existingProduct models.Product
-	if err := db.First(&existingProduct, productID).Error; err != nil {
+	var attribute models.Attribute
+	if err := db.First(&attribute, attributeId).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve data from the database"})
 		return
 	}
 
-	if err := db.Model(&existingProduct).Updates(updateData).Error; err != nil {
+	if err := db.Model(&attribute).Updates(updateData).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update product"})
 		return
 	}
 
-	c.JSON(http.StatusOK, existingProduct)
+	c.JSON(http.StatusOK, attribute)
 }
