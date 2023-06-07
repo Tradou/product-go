@@ -24,3 +24,11 @@ type UpdateAttributeProduct struct {
 	PriceModification uint   `json:"price_modification" binding:"required"`
 	Stock             uint   `json:"stock" binding:"required"`
 }
+
+func (StoreAttributeProduct) TableName() string {
+	return "attribute_products"
+}
+
+func (UpdateAttributeProduct) TableName() string {
+	return "attribute_products"
+}

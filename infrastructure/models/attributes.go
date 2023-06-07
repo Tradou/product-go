@@ -13,3 +13,11 @@ type StoreAttribute struct {
 type UpdateAttribute struct {
 	Name string `json:"name" binding:"required"`
 }
+
+func (StoreAttribute) TableName() string {
+	return "attributes"
+}
+
+func (UpdateAttribute) TableName() string {
+	return "attributes"
+}
