@@ -20,9 +20,9 @@ type StoreAttributeProduct struct {
 }
 
 type UpdateAttributeProduct struct {
-	Value             string `json:"value" binding:"required"`
-	PriceModification uint   `json:"price_modification" binding:"required"`
-	Stock             uint   `json:"stock" binding:"required"`
+	Value             string `json:"value"`
+	PriceModification uint   `json:"price_modification"`
+	Stock             uint   `json:"stock"`
 }
 
 func (StoreAttributeProduct) TableName() string {
