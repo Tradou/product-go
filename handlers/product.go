@@ -3,6 +3,7 @@ package handlers
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"main/infrastructure/database"
 	"main/infrastructure/models"
 	"net/http"
 )
@@ -24,6 +25,18 @@ func StoreProduct(c *gin.Context) {
 	if err := c.ShouldBind(&product); err != nil {
 		fmt.Println(product)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	db, err := database.GetDBConnection()
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, "Failed to connect database")
+		return
+	}
+
+	if err := db.Create(&product).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, err.Error())
 		return
 	}
 
