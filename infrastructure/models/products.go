@@ -21,6 +21,17 @@ type StoreProduct struct {
 	State       *bool  `json:"state" binding:"required"`
 }
 
+type UpdateProduct struct {
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Price       uint   `json:"price"`
+	State       *bool  `json:"state"`
+}
+
 func (StoreProduct) TableName() string {
+	return "products"
+}
+
+func (UpdateProduct) TableName() string {
 	return "products"
 }
