@@ -9,9 +9,21 @@ import (
 )
 
 func GetProducts(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Products",
-	})
+	var products []models.Product
+
+	db, err := database.GetDBConnection()
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, "Failed to connect database")
+		return
+	}
+
+	if err := db.Find(&products).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, "Failed to retrieve data")
+		return
+	}
+
+	c.JSON(http.StatusOK, products)
 }
 
 func GetProduct(c *gin.Context) {
