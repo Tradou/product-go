@@ -8,7 +8,7 @@ import (
 )
 
 func GetAttributes(c *gin.Context) {
-	var products []models.Product
+	var products []models.Attribute
 
 	db, err := database.GetDBConnection()
 
@@ -17,7 +17,7 @@ func GetAttributes(c *gin.Context) {
 		return
 	}
 
-	if err := db.Find(&products).Association("Attributes").Error; err != nil {
+	if err := db.Find(&products).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 		return
 	}
@@ -26,7 +26,7 @@ func GetAttributes(c *gin.Context) {
 }
 
 func GetAttribute(c *gin.Context) {
-	var product models.Product
+	var product models.Attribute
 	productId := c.Param("id")
 
 	db, err := database.GetDBConnection()
@@ -45,7 +45,7 @@ func GetAttribute(c *gin.Context) {
 }
 
 func StoreAttribute(c *gin.Context) {
-	var product models.StoreProduct
+	var product models.StoreAttribute
 
 	if err := c.ShouldBind(&product); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -69,7 +69,7 @@ func StoreAttribute(c *gin.Context) {
 
 func UpdateAttribute(c *gin.Context) {
 	productID := c.Param("id")
-	var updateData models.UpdateProduct
+	var updateData models.UpdateAttribute
 
 	if err := c.ShouldBindJSON(&updateData); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

@@ -8,7 +8,7 @@ import (
 )
 
 func GetAttributeProducts(c *gin.Context) {
-	var products []models.Product
+	var products []models.AttributeProduct
 
 	db, err := database.GetDBConnection()
 
@@ -26,7 +26,7 @@ func GetAttributeProducts(c *gin.Context) {
 }
 
 func GetAttributeProduct(c *gin.Context) {
-	var product models.Product
+	var product models.AttributeProduct
 	productId := c.Param("id")
 
 	db, err := database.GetDBConnection()
@@ -45,7 +45,7 @@ func GetAttributeProduct(c *gin.Context) {
 }
 
 func StoreAttributeProduct(c *gin.Context) {
-	var product models.StoreProduct
+	var product models.StoreAttributeProduct
 
 	if err := c.ShouldBind(&product); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -69,7 +69,7 @@ func StoreAttributeProduct(c *gin.Context) {
 
 func UpdateAttributeProduct(c *gin.Context) {
 	productID := c.Param("id")
-	var updateData models.UpdateProduct
+	var updateData models.UpdateAttributeProduct
 
 	if err := c.ShouldBindJSON(&updateData); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
