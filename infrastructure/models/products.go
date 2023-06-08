@@ -5,6 +5,8 @@ import (
 	"time"
 )
 
+type ProductModel struct{}
+
 type Product struct {
 	ID          uint
 	Name        string      `gorm:"not null;size:64"`
@@ -18,6 +20,7 @@ type Product struct {
 }
 
 type StoreProduct struct {
+	ProductModel
 	Name        string `json:"name" binding:"required"`
 	Description string `json:"description" binding:"required"`
 	Price       uint   `json:"price" binding:"required"`
@@ -26,6 +29,7 @@ type StoreProduct struct {
 }
 
 type UpdateProduct struct {
+	ProductModel
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	Price       uint   `json:"price"`
@@ -33,10 +37,6 @@ type UpdateProduct struct {
 	State       *bool  `json:"state"`
 }
 
-func (StoreProduct) TableName() string {
-	return "products"
-}
-
-func (UpdateProduct) TableName() string {
+func (ProductModel) TableName() string {
 	return "products"
 }
