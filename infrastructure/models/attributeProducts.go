@@ -1,5 +1,7 @@
 package models
 
+type AttributeProductModel struct{}
+
 type AttributeProduct struct {
 	ID                uint
 	ProductID         uint
@@ -12,6 +14,7 @@ type AttributeProduct struct {
 }
 
 type GetAttributeProduct struct {
+	AttributeProductModel
 	ID                uint
 	ProductID         uint
 	AttributeID       uint
@@ -21,6 +24,7 @@ type GetAttributeProduct struct {
 }
 
 type StoreAttributeProduct struct {
+	AttributeProductModel
 	ProductID         uint   `json:"product_id" binding:"required"`
 	AttributeID       uint   `json:"attribute_id" binding:"required"`
 	Value             string `json:"value" binding:"required"`
@@ -29,19 +33,12 @@ type StoreAttributeProduct struct {
 }
 
 type UpdateAttributeProduct struct {
+	AttributeProductModel
 	Value             string `json:"value"`
 	PriceModification uint   `json:"price_modification"`
 	Stock             uint   `json:"stock"`
 }
 
-func (GetAttributeProduct) TableName() string {
-	return "attribute_products"
-}
-
-func (StoreAttributeProduct) TableName() string {
-	return "attribute_products"
-}
-
-func (UpdateAttributeProduct) TableName() string {
+func (AttributeProductModel) TableName() string {
 	return "attribute_products"
 }
