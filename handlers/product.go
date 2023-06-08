@@ -17,7 +17,7 @@ func GetProducts(c *gin.Context) {
 		return
 	}
 
-	if err := db.Find(&products).Association("Attributes").Error; err != nil {
+	if err := db.Find(&products).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 		return
 	}
