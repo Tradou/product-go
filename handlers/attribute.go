@@ -8,7 +8,7 @@ import (
 )
 
 func GetAttributes(c *gin.Context) {
-	var attributes []models.Attribute
+	var attributes []models.GetAttribute
 
 	db, err := database.GetDBConnection()
 
@@ -26,7 +26,7 @@ func GetAttributes(c *gin.Context) {
 }
 
 func GetAttribute(c *gin.Context) {
-	var attribute models.Attribute
+	var attribute models.GetAttribute
 	attributeId := c.Param("id")
 
 	db, err := database.GetDBConnection()
@@ -82,7 +82,7 @@ func UpdateAttribute(c *gin.Context) {
 		return
 	}
 
-	var attribute models.Attribute
+	var attribute models.GetAttribute
 	if err := db.First(&attribute, attributeId).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve data from the database"})
 		return
