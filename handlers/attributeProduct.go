@@ -82,7 +82,7 @@ func UpdateAttributeProduct(c *gin.Context) {
 		return
 	}
 
-	var attributeProduct models.UpdateAttributeProduct
+	var attributeProduct models.AttributeProduct
 	if err := db.First(&attributeProduct, attributeProductId).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve data from the database"})
 		return
