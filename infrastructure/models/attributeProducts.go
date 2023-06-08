@@ -11,6 +11,15 @@ type AttributeProduct struct {
 	Attribute         Attribute `gorm:"foreignKey:AttributeID"`
 }
 
+type GetAttributeProduct struct {
+	ID                uint
+	ProductID         uint
+	AttributeID       uint
+	Value             string `gorm:"not null;size:64"`
+	PriceModification uint   `gorm:"not null"`
+	Stock             uint   `gorm:"not null"`
+}
+
 type StoreAttributeProduct struct {
 	ProductID         uint   `json:"product_id" binding:"required"`
 	AttributeID       uint   `json:"attribute_id" binding:"required"`
@@ -23,6 +32,10 @@ type UpdateAttributeProduct struct {
 	Value             string `json:"value"`
 	PriceModification uint   `json:"price_modification"`
 	Stock             uint   `json:"stock"`
+}
+
+func (GetAttributeProduct) TableName() string {
+	return "attribute_products"
 }
 
 func (StoreAttributeProduct) TableName() string {
