@@ -18,6 +18,8 @@ func Migrate() {
 		&models.Product{},
 		&models.Attribute{},
 		&models.AttributeProduct{},
+		&models.Order{},
+		&models.OrderItem{},
 	); err != nil {
 		log.Fatalln(err)
 	}
