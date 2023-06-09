@@ -8,5 +8,6 @@ func RegisterEndpoints() {
 	RegisterProductEndpoint(router)
 	RegisterAttributeEndpoint(router)
 	RegisterAttributeProductEndpoint(router)
+	RegisterOrderEndpoint(router)
 	router.Run(":80")
 }
