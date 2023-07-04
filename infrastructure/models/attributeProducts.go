@@ -39,6 +39,16 @@ type UpdateAttributeProduct struct {
 	Stock             uint   `json:"stock"`
 }
 
+type OrderAttributeProduct struct {
+	AttributeProductModel
+	ID                uint
+	ProductID         uint
+	AttributeID       uint
+	Value             string    `gorm:"not null;size:64"`
+	PriceModification uint      `gorm:"not null"`
+	Attribute         Attribute `gorm:"foreignKey:AttributeID"`
+}
+
 func (AttributeProductModel) TableName() string {
 	return "attribute_products"
 }

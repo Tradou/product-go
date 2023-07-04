@@ -10,7 +10,5 @@ func RegisterOrderEndpoint(router *gin.Engine) {
 	{
 		orders.GET("", handlers.GetOrders)
 		orders.GET("/:id", handlers.GetOrder)
-		orders.POST("", handlers.StoreOrder)
-		orders.PATCH("/:id", handlers.UpdateOrder)
 	}
 }

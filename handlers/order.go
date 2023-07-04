@@ -8,7 +8,7 @@ import (
 )
 
 func GetOrders(c *gin.Context) {
-	var orders []models.Order
+	var orders []models.GetOrder
 
 	db, err := database.GetDBConnection()
 
@@ -17,7 +17,18 @@ func GetOrders(c *gin.Context) {
 		return
 	}
 
-	if err := db.Find(&orders).Error; err != nil {
+	if err := db.
+		Preload("OrderItems").
+		//Preload("OrderItems", func(db *gorm.DB) *gorm.DB {
+		//	return db.Where("order_items.attribute_product_id IS NULL").
+		//		Preload("Product")
+		//}).
+		//Preload("OrderItems", func(db *gorm.DB) *gorm.DB {
+		//	return db.Where("order_items.attribute_product_id IS NOT NULL").
+		//		Preload("AttributeProduct.Product").
+		//		Preload("AttributeProduct.Attribute")
+		//}).
+		Find(&orders).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 		return
 	}

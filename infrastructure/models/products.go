@@ -37,6 +37,13 @@ type UpdateProduct struct {
 	State       *bool  `json:"state"`
 }
 
+type OrderProduct struct {
+	ProductModel
+	ID          uint
+	Name        string `gorm:"not null;size:64"`
+	Description string `gorm:"not null"`
+}
+
 func (ProductModel) TableName() string {
 	return "products"
 }
